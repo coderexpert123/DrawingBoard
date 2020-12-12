@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WhiteBoard.org</title>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+
+<style>
+	#div{
+
+		width: 600px;
+		height: 500px;
+		border: 5px solid #000000;
+	}
+	.btn{
+		 
+		margin-top: 25px;
+		text-align:center;
+		font-size: 20px;
+		padding: 10px;
+
+
+		font-style: bold;
+		background-color:#ff0000;
+
+		color: #fff;
+		border-radius: 20px;
+
+	}
+
+</style>
+
+<body>
+
+
+<div id="div"></div>
+<button id="button" class="btn">Take Images</button>
+
+
+
+
+
+
+
+
+</body>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.2.0/dom-to-image.min.js"></script>
+<script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/drawingboard.js/0.4.2/drawingboard.min.js"></script>
+
+
+<script>
+	
+	$(document).ready(function(){
+		
+var imageBoard = new DrawingBoard.Board('div', {
+controls: [
+		'Color',
+		{ Size: { type: 'dropdown' } },
+		{ DrawingMode: { filler: false } },
+		'Navigation',
+		'Download'
+	],
+	size: 1,
+	webStorage: 'session',
+	enlargeYourContainer: true
+});
+
+		$("#button").click(function(){
+
+			domtoimage.toBlob(document.getElementById('div'))
+    .then(function (blob) {
+        window.saveAs(blob, 'picture.png');
+    });
+		})
+	})
+</script>
+</html>
